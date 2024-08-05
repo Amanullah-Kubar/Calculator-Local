@@ -18,6 +18,8 @@ public class Main implements ActionListener {
         frame.setSize(300, 400);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
+        frame.setResizable(false);
+
 
 
 
