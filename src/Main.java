@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 public class Main implements ActionListener {
 
     static JFrame frame ;
+    ImageIcon deleteIcon;
     char opperator;
     double num1,num2,result;
     static JButton[] button = new JButton[10];
@@ -22,14 +23,15 @@ public class Main implements ActionListener {
 
         JPanel topPanel = new JPanel();
         JPanel centerPanel = new JPanel();
+        deleteIcon = new ImageIcon("D:\\Java\\Calculator\\icons\\delete.png");
 
-        field = new JTextField(16);
+        field = new JTextField(17);
         frame.add(centerPanel, BorderLayout.CENTER);
-        centerPanel.setBackground(Color.ORANGE);
+        centerPanel.setBackground(Color.GRAY);
 
         field.setPreferredSize(new Dimension(300,60));
 
-        field.setFont(new Font("SansSerif", Font.BOLD, 20));
+        field.setFont(new Font("SansSerif", Font.PLAIN, 20));
 
 
         field.setEditable(false);
@@ -59,9 +61,13 @@ public class Main implements ActionListener {
         button[4] = new JButton("=");
         button[5] = new JButton("C");
         button[6] = new JButton(".");
-        button[7] = new JButton("p");
+        button[7] = new JButton();
+        button[7].setIcon(new ImageIcon("D:\\Java\\Calculator\\icons\\power.png"));
         button[8] = new JButton("%");
-        button[9] = new JButton("CE");
+        button[9] = new JButton();
+        button[9].setIcon(deleteIcon);
+
+        button[0].setBorderPainted(false);
 
         for (int i = 0; i < 10; i++) {
             number[i] = new JButton(String.valueOf(i));
@@ -69,6 +75,9 @@ public class Main implements ActionListener {
             number[i].setFocusable(false);
             button[i].setFocusable(false);
             button[i].setFont(new Font("SansSerif", Font.BOLD, 20));
+            button[i].setBackground(Color.WHITE);
+            number[i].setBackground(Color.WHITE);
+
 
             number[i].addActionListener(this);
             button[i].addActionListener(this);
@@ -77,32 +86,32 @@ public class Main implements ActionListener {
 
 
         centerPanel.add(button[5]);
+        centerPanel.add(button[7]);
+        centerPanel.add(button[8]);
         centerPanel.add(button[9]);
-        centerPanel.add(button[2]);
-        centerPanel.add(button[3]);
 
         centerPanel.add(number[7]);
         centerPanel.add(number[8]);
         centerPanel.add(number[9]);
 
-        centerPanel.add(button[1]);
+        centerPanel.add(button[3]);
 
         centerPanel.add(number[4]);
         centerPanel.add(number[5]);
         centerPanel.add(number[6]);
-        centerPanel.add(button[0]);
+        centerPanel.add(button[1]);
 
         centerPanel.add(number[1]);
         centerPanel.add(number[2]);
         centerPanel.add(number[3]);
-        centerPanel.add(button[7]);
+        centerPanel.add(button[0]);
 
 
 
         centerPanel.add(button[6]);
         centerPanel.add(number[0]);
-        centerPanel.add(button[8]);
         centerPanel.add(button[4]);
+        centerPanel.add(button[2]);
 
 
 
@@ -130,29 +139,46 @@ public class Main implements ActionListener {
 
         if (e.getSource()==button[0]){
 //            + button
-            num1=Double.parseDouble(field.getText());
-            opperator='+';
-            field.setText("");
+            try {
+                num1 = Double.parseDouble(field.getText());
+                opperator = '+';
+                field.setText("");
+
+            }catch (Exception m){
+
+            }
+
+
 
 
         }
         if (e.getSource()==button[1]){
             //- button
-            num1=Double.parseDouble(field.getText());
-            opperator='-';
-            field.setText("");
+            try {
+                num1 = Double.parseDouble(field.getText());
+                opperator = '-';
+                field.setText("");
+            }catch (Exception m){}
         }
         if (e.getSource()==button[2]){
             //* button
-            num1=Double.parseDouble(field.getText());
-            opperator='*';
-            field.setText("");
+            try {
+                num1 = Double.parseDouble(field.getText());
+                opperator = '*';
+                field.setText("");
+
+            }catch (Exception m){}
+
         }
         if (e.getSource()==button[3]){
             // / button
-            num1=Double.parseDouble(field.getText());
-            opperator='/';
-            field.setText("");
+            try {
+                num1 = Double.parseDouble(field.getText());
+                opperator = '/';
+                field.setText("");
+
+            }catch (Exception m){}
+
         }
         if (e.getSource()==button[5]){
             // C button
@@ -168,13 +194,21 @@ public class Main implements ActionListener {
         }
         if (e.getSource()==button[8]){
             // % button
-            num1=Double.parseDouble(field.getText());
-            opperator='%';
-            field.setText("");
+            try {
+                num1=Double.parseDouble(field.getText());
+                opperator='%';
+                field.setText("");
+            }catch (Exception m){}
+
         }
         if (e.getSource()==button[9]){
-            // CE button
+            // delete one character
+
+            String str=field.getText();
             field.setText("");
+            for (int i = 0; i < str.length()-1; i++) {
+                field.setText(field.getText()+str.charAt(i));
+            }
         }
 
 
